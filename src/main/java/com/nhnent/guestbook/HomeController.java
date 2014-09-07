@@ -1,4 +1,4 @@
-package con.nhnent.guestbook;
+package com.nhnent.guestbook;
 
 import java.text.DateFormat;
 import java.util.Date;
