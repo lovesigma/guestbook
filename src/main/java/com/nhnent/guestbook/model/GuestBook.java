@@ -3,11 +3,11 @@ package com.nhnent.guestbook.model;
 import java.sql.Date;
 
 public class GuestBook {
-	String content;
-	String email;
-	String password;
-	Date createDate;
-	Date changeDate;
+	private String content;
+	private String email;
+	private String password;
+	private Date createDate;
+	private Date changeDate;
 	public String getContent() {
 		return content;
 	}

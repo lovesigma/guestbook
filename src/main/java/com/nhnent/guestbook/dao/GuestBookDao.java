@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -30,12 +31,15 @@ public class GuestBookDao {
 							"root", "0415");
 			java.sql.Statement st = null;
 			st = con.createStatement();
-			String query = " insert into guestbook (email, password, content)"
-					+ " values (?, ?, ?)";
+			String query = " insert into guestbook (email, password, content, create_date)"
+					+ " values (?, ?, ?, ?)";
+			Calendar cal = Calendar.getInstance();
+			Date date = new Date(cal.getTimeInMillis());
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			preparedStmt.setString(1, guestBook.getEmail());
 			preparedStmt.setString(2, guestBook.getPassword());
 			preparedStmt.setString(3, guestBook.getContent());
+			preparedStmt.setDate(4, date);
 			preparedStmt.execute();
 			preparedStmt.close();
 			con.close();
