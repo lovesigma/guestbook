@@ -8,7 +8,15 @@ public class GuestBook {
 	private String password;
 	private Date createDate;
 	private Date changeDate;
-	public GuestBook(String email,String password,String content,Date createDate) {
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public GuestBook(int id,String email,String password,String content,Date createDate) {
+		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.content = content;

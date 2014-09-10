@@ -1,5 +1,7 @@
 package com.nhnent.guestbook;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,9 +57,26 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insertGuestBook(@ModelAttribute GuestBook guestBook){
-		System.out.println("asdasdasd");
 		guestBookService.addGuestBook(guestBook);
 		return "redirect:/";
+	}
+	@RequestMapping(value = "/change", method = RequestMethod.POST)
+	public String changeGuestBook(@ModelAttribute GuestBook guestBook){
+		System.out.println("asdasdasd");
+		guestBookService.chageGuestBook(guestBook);
+		return "redirect:/";
+	}
+	@RequestMapping(value = "/isValidPassword", method = RequestMethod.GET , produces="text/plain")
+	public void isValidPasswrod(HttpServletResponse res,@RequestParam(value = "id", required = false) int id,@RequestParam(value = "password", required = false) String password) {
+	        PrintWriter out;
+			try {
+				out = res.getWriter();
+				out.print(guestBookService.isValidPassword(id, password));
+		        out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	        
 	}
 	
 	

@@ -3,6 +3,8 @@ package com.nhnent.guestbook.service;
 
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +30,25 @@ public class GuestBookServiceTest {
 		guestBookDao.insert(guestBook);
 		int afterSize = guestBookDao.getListSize();
 		assertThat(beforeSize+1, is(afterSize));
+	}
+	@Test
+	public void 비밀번호가_올바면_True(){
+		String password = "0415";
+		GuestBook guestBook = new GuestBook("lovate@naver.com",password,"test");
+		guestBook.setContent("test");
+		guestBook.setEmail("lovesigma@naver.com");
+		guestBook.setPassword(password);
+		int id = guestBookDao.insert(guestBook);
+		assertTrue(guestBookService.isValidPassword(id,password));
+	}
+	@Test
+	public void 비밀번호가_올바지못하면_False(){
+		String password = "0415";
+		GuestBook guestBook = new GuestBook("lovate@naver.com",password,"test");
+		guestBook.setContent("test");
+		guestBook.setEmail("lovesigma@naver.com");
+		guestBook.setPassword(password);
+		int id = guestBookDao.insert(guestBook);
+		assertFalse(guestBookService.isValidPassword(id,password+"ddd"));
 	}
 }

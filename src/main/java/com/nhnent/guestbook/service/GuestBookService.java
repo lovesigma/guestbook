@@ -26,4 +26,26 @@ private GuestBookDao guestBookDao;
 	private void isValidEmail(String email) {
 		// 이메일이 유효한지 봐야함.
 	}
+
+	public boolean isValidPassword(int id, String password) {
+		// TODO Auto-generated method stub
+		String originPassword = guestBookDao.getPassword(id);
+		if(originPassword.equals(password)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public void chageGuestBook(GuestBook guestBook) {
+		String originPassword = guestBookDao.getPassword(guestBook.getId());
+		if(originPassword.endsWith(guestBook.getPassword())){
+			guestBookDao.changeGuestBook(guestBook);
+			System.out.println("sucess");
+		}
+		else{
+			System.out.println("fail");
+		}
+	}
 }
