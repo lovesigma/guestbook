@@ -6,7 +6,7 @@ public class GuestBook {
 	String content;
 	String email;
 	String password;
-	Date writeDate;
+	Date createDate;
 	Date changeDate;
 	public String getContent() {
 		return content;
@@ -26,11 +26,11 @@ public class GuestBook {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getWriteDate() {
-		return writeDate;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setWriteDate(Date writeDate) {
-		this.writeDate = writeDate;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 	public Date getChangeDate() {
 		return changeDate;
