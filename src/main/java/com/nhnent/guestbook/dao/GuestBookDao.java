@@ -6,7 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -84,6 +86,34 @@ public class GuestBookDao {
 		return 0;
 
 
+	}
+
+	public List<GuestBook> getGuestBookList() {
+		Connection con;
+		List<GuestBook> guestBookList = new ArrayList<GuestBook>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager
+					.getConnection(
+							"jdbc:mysql://127.0.0.1:3306/guestbook?useUnicode=true&characterEncoding=euckr",
+							"root", "0415");
+
+			String query = "SELECT * FROM guestbook";
+			java.sql.Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) {
+				GuestBook guestBook = new GuestBook(rs.getString("email"),rs.getString("password"),rs.getString("content"),rs.getDate("create_date"));
+				guestBookList.add(guestBook);
+			}
+			System.out.println(guestBookList.size());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return guestBookList;
 	}
 
 }

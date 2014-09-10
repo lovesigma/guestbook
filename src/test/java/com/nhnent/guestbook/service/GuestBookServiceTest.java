@@ -21,7 +21,7 @@ public class GuestBookServiceTest {
 	@Test
 	public void 올바른GuestBook추가(){
 		int beforeSize = guestBookDao.getListSize();
-		GuestBook guestBook = new GuestBook();
+		GuestBook guestBook = new GuestBook("test","0415","lovate@naver.com");
 		guestBook.setContent("test");
 		guestBook.setEmail("lovesigma@naver.com");
 		guestBook.setPassword("0412412415");

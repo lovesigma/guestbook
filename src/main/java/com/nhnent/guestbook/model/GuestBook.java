@@ -8,6 +8,19 @@ public class GuestBook {
 	private String password;
 	private Date createDate;
 	private Date changeDate;
+	public GuestBook(String email,String password,String content,Date createDate) {
+		this.email = email;
+		this.password = password;
+		this.content = content;
+		this.createDate = createDate;
+	}
+	public GuestBook() {
+	}
+	public GuestBook(String email,String password,String content) {
+		this.email = email;
+		this.password = password;
+		this.content = content;
+	}
 	public String getContent() {
 		return content;
 	}
