@@ -8,7 +8,7 @@
     <bean id="propertyPlaceholderConfigurer"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
-            <value>classpath:configuration/mybatis/config.properties</value>
+            <value>classpath:testconfig/mybatis/config.properties</value>
         </property>
     </bean>
 

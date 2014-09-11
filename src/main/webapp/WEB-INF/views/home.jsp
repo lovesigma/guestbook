@@ -8,7 +8,7 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>Hello world!</h1>
+	<h1>방명록 남기기~~!!</h1>
 	<form id="writeform" action="/insert" method="post">
 		<div id="currentArea" class="minime-avatar-zone" style="width: 600px;">
 			<div id="currentMinime" class="minime-avatar" style="display:;">
@@ -70,13 +70,12 @@
 				if (request.status === 200) {
 					// Parse the JSON
 					if(request.responseText=='true'){
-						alert('true');
 						$("#"+targetId+"content").attr("readonly", false);
 						$("#"+targetId+"changeBtn").attr("hidden",true);
 						$("#"+targetId+"changeCompleteBtn").attr("hidden",false);
 					}
 					else{
-						alert('false');
+						alert("패스워드가 올바르지 못합니다.");
 					}
 
 				} else {

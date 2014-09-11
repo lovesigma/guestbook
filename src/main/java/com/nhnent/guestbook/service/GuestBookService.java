@@ -17,14 +17,12 @@ import com.nhnent.guestbook.model.GuestBook;
 public class GuestBookService {
 	@Autowired
 	private GuestBookDao guestBookDao;
-
-	public void addGuestBook(GuestBook guestBook) {
+	public int addGuestBook(GuestBook guestBook) {
 		if (isValidEmail(guestBook.getEmail())) {
-			guestBookDao.insert(guestBook);
+			return guestBookDao.insert(guestBook);
 		}
-
+		return -1;
 	}
-
 	public boolean isValidEmail(String email) {
 		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
@@ -46,9 +44,7 @@ public class GuestBookService {
 		String originPassword = guestBookDao.getPassword(guestBook.getId());
 		if (originPassword.endsWith(guestBook.getPassword())) {
 			guestBookDao.changeGuestBook(guestBook);
-			System.out.println("sucess");
 		} else {
-			System.out.println("fail");
 		}
 	}
 }
