@@ -15,36 +15,39 @@ import com.nhnent.guestbook.model.GuestBook;
 
 @Service
 public class GuestBookService {
-@Autowired
-private GuestBookDao guestBookDao;
+	@Autowired
+	private GuestBookDao guestBookDao;
 
 	public void addGuestBook(GuestBook guestBook) {
-		guestBookDao.insert(guestBook);
-		
+		if (isValidEmail(guestBook.getEmail())) {
+			guestBookDao.insert(guestBook);
+		}
+
 	}
 
-	private void isValidEmail(String email) {
-		// 이메일이 유효한지 봐야함.
+	public boolean isValidEmail(String email) {
+		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+		java.util.regex.Matcher m = p.matcher(email);
+		return m.matches();
 	}
 
 	public boolean isValidPassword(int id, String password) {
 		// TODO Auto-generated method stub
 		String originPassword = guestBookDao.getPassword(id);
-		if(originPassword.equals(password)){
+		if (originPassword.equals(password)) {
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
 	}
 
 	public void chageGuestBook(GuestBook guestBook) {
 		String originPassword = guestBookDao.getPassword(guestBook.getId());
-		if(originPassword.endsWith(guestBook.getPassword())){
+		if (originPassword.endsWith(guestBook.getPassword())) {
 			guestBookDao.changeGuestBook(guestBook);
 			System.out.println("sucess");
-		}
-		else{
+		} else {
 			System.out.println("fail");
 		}
 	}

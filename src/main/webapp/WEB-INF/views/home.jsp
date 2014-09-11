@@ -12,11 +12,12 @@
 	<form id="writeform" action="/insert" method="post">
 		<div id="currentArea" class="minime-avatar-zone" style="width: 600px;">
 			<div id="currentMinime" class="minime-avatar" style="display:;">
-				<input id="email" name="email" style="width: 50%;"><input
-					name="password" id="password" style="width: 50%;" type="password">
+				<input id="email" name="email" style="width: 50%;" placeholder="Email Address"><input
+					name="password" id="password" style="width: 50%;" type="password"  placeholder="Password">
 			</div>
 			<input id="content" name="content"
-				style="width: 100%; height: 300px;"></input> <input type="submit"
+				style="width: 100%; height: 300px;"></input> <input type="button" value="방명록남기기" onclick="validateEmail()"
+					 placeholder="내용을 입력하세요~!"
 				style="right: 30dp" />
 		</div>
 
@@ -46,7 +47,18 @@
 			</div>
 		</form>
 	</c:forEach>
-
+	<script type="text/javascript">
+	function validateEmail() {
+		var email = $("#email").val();
+	    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    if(re.test(email)){
+	    	document.getElementById("writeform").submit();
+	    }
+	    else{
+	    	alert("Email형식이 올바르지 못합니다.")
+	    }
+	} 
+	</script>
 	<script type="text/javascript">
 		// Get the <datalist> and <input> elements.
 		

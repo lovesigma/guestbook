@@ -27,9 +27,11 @@ public class GuestBookServiceTest {
 		guestBook.setContent("test");
 		guestBook.setEmail("lovesigma@naver.com");
 		guestBook.setPassword("0412412415");
-		guestBookDao.insert(guestBook);
-		int afterSize = guestBookDao.getListSize();
-		assertThat(beforeSize+1, is(afterSize));
+		int id = guestBookDao.insert(guestBook);
+		GuestBook guestBook2 = guestBookDao.getGuestBook(id);
+		assertThat(guestBook.getPassword(), is(guestBook2.getPassword()));
+		assertThat(guestBook.getContent(), is(guestBook2.getContent()));
+		assertThat(guestBook.getEmail(), is(guestBook2.getEmail()));
 	}
 	@Test
 	public void 비밀번호가_올바면_True(){
@@ -51,4 +53,15 @@ public class GuestBookServiceTest {
 		int id = guestBookDao.insert(guestBook);
 		assertFalse(guestBookService.isValidPassword(id,password+"ddd"));
 	}
+	@Test
+	public void 이메일이_형식이_올바르지_못하면_False(){
+		String email = "124124asdasdasdasd.com";
+		assertFalse(guestBookService.isValidEmail(email));
+	}
+	@Test
+	public void 이메일이_형식이_올바르_True(){
+		String email = "lovesigma@naver.com";
+		assertTrue(guestBookService.isValidEmail(email));
+	}
+	
 }

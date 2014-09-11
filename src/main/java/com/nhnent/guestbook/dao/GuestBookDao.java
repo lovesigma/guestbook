@@ -93,7 +93,38 @@ public class GuestBookDao {
 		return 0;
 
 	}
+	public GuestBook getGuestBook(int id) {
+		Connection con;
+		List<GuestBook> guestBookList = new ArrayList<GuestBook>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
 
+			con = DriverManager
+					.getConnection(
+							"jdbc:mysql://127.0.0.1:3306/guestbook?useUnicode=true&characterEncoding=euckr",
+							"root", "0415");
+
+			String query = "SELECT * FROM guestbook WHERE id = "+ id;
+			java.sql.Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			if(rs.next()){
+				GuestBook guestBook = new GuestBook(rs.getInt("id"),
+						rs.getString("email"), rs.getString("password"),
+						rs.getString("content"), rs.getDate("create_date"));
+				System.out.println(guestBook.getContent());
+				guestBookList.add(guestBook);
+				return guestBook;
+			}
+			
+			System.out.println(guestBookList.size());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	public List<GuestBook> getGuestBookList() {
 		Connection con;
 		List<GuestBook> guestBookList = new ArrayList<GuestBook>();
